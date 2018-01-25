@@ -741,6 +741,11 @@ function stateCore(state = __WEBPACK_IMPORTED_MODULE_2__coreState__["a" /* defau
     return Object.assign(state,{
       canvasIndex: state.canvasIndex - 1
     });
+  case __WEBPACK_IMPORTED_MODULE_1__actionTypes__["c" /* INCREMENT_MANIFEST */]:
+    console.log('increment manifest');
+    return Object.assign(state,{
+      manifestIndex: state.manifestIndex + 1
+    });
   default:
     return state;
   }
@@ -1380,6 +1385,9 @@ const INCREMENT = 'INCREMENT';
 
 const DECREMENT = 'DECREMENT';
 /* harmony export (immutable) */ __webpack_exports__["a"] = DECREMENT;
+
+const INCREMENT_MANIFEST = 'INCREMENT_MANIFEST';
+/* harmony export (immutable) */ __webpack_exports__["c"] = INCREMENT_MANIFEST;
 
 const REQUEST_MANIFEST = 'REQUEST_MANIFEST';
 /* unused harmony export REQUEST_MANIFEST */
