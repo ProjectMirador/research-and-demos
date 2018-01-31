@@ -28,6 +28,11 @@ function stateCore(state = initialState, action) {
     return Object.assign(state,{
       canvasIndex: state.canvasIndex - 1
     });
+  case ActionTypes.INCREMENT_MANIFEST:
+    console.log('increment manifest');
+    return Object.assign(state,{
+      manifestIndex: state.manifestIndex + 1
+    });
   default:
     return state;
   }

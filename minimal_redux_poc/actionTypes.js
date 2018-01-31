@@ -1,5 +1,9 @@
+//increase canvas index
 export const INCREMENT = 'INCREMENT';
+//decrease canvas index
 export const DECREMENT = 'DECREMENT';
+//increase manifest index
+export const INCREMENT_MANIFEST = 'INCREMENT_MANIFEST';
 export const REQUEST_MANIFEST = 'REQUEST_MANIFEST';
 export const RECEIVE_MANIFEST = 'RECEIVE_MANIFEST';
 export const ADD_MANIFEST = 'ADD_MANIFEST';
