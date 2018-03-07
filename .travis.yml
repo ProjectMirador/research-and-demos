@@ -1,0 +1,6 @@
+language: node_js
+node_js:
+  - 'node'
+before_script:
+  - cd minimal_redux_poc
+  - npm install
