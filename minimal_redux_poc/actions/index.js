@@ -1,3 +1,4 @@
+import fetch from 'node-fetch';
 import ActionTypes from '../action-types';
 
 /*
@@ -33,4 +34,37 @@ export function nextCanvas(windowId) {
 
 export function previousCanvas(windowId) {
   return { type: ActionTypes.PREVIOUS_CANVAS, windowId };
+}
+
+export function requestManifest(manifestId) {
+  return {
+    type: ActionTypes.REQUEST_MANIFEST,
+    manifestId,
+  };
+}
+
+export function receiveManifest(manifestId, manifestJson) {
+  return {
+    type: ActionTypes.RECEIVE_MANIFEST,
+    manifestId,
+    manifestJson, // Wrap in manifesto??
+  };
+}
+
+export function receiveManifestFailure(manifestId, error) {
+  return {
+    type: ActionTypes.RECEIVE_MANIFEST_FAILURE,
+    manifestId,
+    error,
+  };
+}
+
+export function fetchManifest(manifestId) {
+  return ((dispatch) => {
+    dispatch(requestManifest(manifestId));
+    return fetch(manifestId)
+      .then(response => response.json())
+      .then(json => dispatch(receiveManifest(manifestId, json)))
+      .catch(error => dispatch(receiveManifestFailure(manifestId, error)));
+  });
 }

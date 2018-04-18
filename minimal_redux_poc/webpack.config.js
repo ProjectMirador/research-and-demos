@@ -1,5 +1,3 @@
-const path = require('path');
-
 module.exports = {
   entry: './index.js',
   output: {
@@ -8,20 +6,13 @@ module.exports = {
     libraryTarget: 'umd',
     library: 'mirador_poc_1',
   },
+  target: 'node',
   module: {
-    loaders: [
-      {
-        test: path.join(__dirname, 'src'),
-        loader: 'babel-loader',
-      },
-    ],
     rules: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: [
-          'eslint-loader',
-        ],
+        use: ['babel-loader', 'eslint-loader'],
       },
     ],
   },
