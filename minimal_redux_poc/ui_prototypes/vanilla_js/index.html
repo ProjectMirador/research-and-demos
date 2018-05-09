@@ -8,6 +8,13 @@
   <body>
 
   <input id="manifestURL" type="text"/><button id="fetchBtn" type="submit">Fetch Manifest</button>
+  <button id="addWindow" type="submit">Add Window</button>
+  <div>
+  <img id="currentImage"/>
+  <button id="nextCanvas" type="submit">Next Image</button>
+  <button id="previousCanvas" type="submit">Previous Image</button>
+  </div>
+
   <pre id="exampleManifest">
 
   </pre>
@@ -17,6 +24,30 @@
       let val = document.getElementById("manifestURL").value;
       let f = m3core.actions.fetchManifest(val);
       m3core.store.dispatch(f);
+    });
+    document.getElementById("addWindow").addEventListener("click", function(){
+      let val = document.getElementById("manifestURL").value;
+      const options = {
+        imageIndex: 0,
+        canvasIndex: 0,
+        collectionIndex: 0,
+        manifestIndex: val,
+        rangeId: null,
+        xywh: null,
+        rotation: null
+      }
+      let w = m3core.actions.addWindow(options);
+      m3core.store.dispatch(w);
+    });
+    document.getElementById("nextCanvas").addEventListener("click", function(){
+      const windowId = this.getAttribute("data-windowid")
+      let a = m3core.actions.nextCanvas(windowId);
+      m3core.store.dispatch(a);
+    });
+    document.getElementById("previousCanvas").addEventListener("click", function(){
+      const windowId = this.getAttribute("data-windowid")
+      let a = m3core.actions.previousCanvas(windowId);
+      m3core.store.dispatch(a);
     });
 
     m3core.store.subscribe(() => {
@@ -32,12 +63,28 @@
             contents = manifest.error.message;
           } else {
             contents = JSON.stringify(manifest.json, 0, 3);
+
+          if (m3core.store.getState().windows.length > 0){
+            //get manifest using manifest index indicated in window state
+            const currentWindow = m3core.store.getState().windows[0]
+            const currentManifest = m3core.store.getState().manifests[currentWindow.manifestIndex]
+            const currentCanvas = currentManifest.json.sequences[0].canvases[currentWindow.canvasIndex]
+            const imgUrl = currentCanvas.images[currentWindow.imageIndex].resource.service["@id"] + "/full/100,/0/default.jpg"
+            document.getElementById("nextCanvas").setAttribute("data-windowid", currentWindow.id)
+            document.getElementById("previousCanvas").setAttribute("data-windowid", currentWindow.id)
+            document.getElementById("currentImage").setAttribute("src", imgUrl)
+          }
+
+
           }
           break;
         default: contents = ''
       }
       document.getElementById("exampleManifest").innerHTML = contents;
+
     });
+
+
 
   </script>
   </body>

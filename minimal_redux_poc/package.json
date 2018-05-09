@@ -34,6 +34,7 @@
     "jest": "^22.4.2",
     "jest-fetch-mock": "^1.5.0",
     "jest-puppeteer": "^2.4.0",
+    "live-server": "^1.2.0",
     "puppeteer": "^1.3.0",
     "redux-mock-store": "^1.5.1",
     "webpack": "3.10.0"
