@@ -1,6 +1,6 @@
 describe('index', () => {
   beforeAll(async () => {
-    await page.goto('http://localhost:4444/examples/vanilla_js/');
+    await page.goto('http://localhost:4444/ui_prototypes/vanilla_js/');
   });
 
   it('should show a form element', async () => {
