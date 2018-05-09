@@ -2,7 +2,7 @@
   "name": "minimal_redux_poc",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.umd.js",
   "scripts": {
     "lint": "node_modules/.bin/eslint ./",
     "test": "npm run lint && node_modules/.bin/jest",
