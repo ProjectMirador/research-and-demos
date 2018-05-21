@@ -7,6 +7,7 @@
     "lint": "node_modules/.bin/eslint ./",
     "test": "npm run lint && node_modules/.bin/jest",
     "test:watch": "npm test -- --watch",
+    "serve:examples": "node_modules/.bin/http-server -p 4444",
     "build:umd": "node_modules/.bin/webpack --output-filename index.umd.js"
   },
   "author": "Drew Winget <scipioaffricanus@gmail.com> (https://aeschylus.net/)",
@@ -30,14 +31,19 @@
     "eslint-plugin-jest": "^21.13.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.7.0",
+    "http-server": "^0.11.1",
     "jest": "^22.4.2",
     "jest-fetch-mock": "^1.5.0",
+    "jest-puppeteer": "^2.4.0",
+    "live-server": "^1.2.0",
+    "puppeteer": "^1.3.0",
     "redux-mock-store": "^1.5.1",
     "webpack": "3.10.0"
   },
   "jest": {
     "setupFiles": [
       "./setupJest.js"
-    ]
+    ],
+    "preset": "jest-puppeteer"
   }
 }

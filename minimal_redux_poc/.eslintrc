@@ -2,6 +2,10 @@
   "env": {
     "jest/globals": true
   },
+  "globals": {
+    "page": true,
+    "browser": true
+  },
   "extends": "airbnb",
   "plugins": ["jest"]
 }
