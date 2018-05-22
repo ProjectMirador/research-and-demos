@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 import workspaceReducer from './workspace';
 import windowsReducer from './windows';
 import manifestsReducer from './manifests';
+import collectionsReducer from './collections';
 
 /**
  * This is a reducer, a pure function with (state, action) => state signature.
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   workspace: workspaceReducer,
   windows: windowsReducer,
   manifests: manifestsReducer,
+  collections: collectionsReducer,
 });
 
 export default rootReducer;

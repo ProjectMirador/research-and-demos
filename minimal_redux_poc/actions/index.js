@@ -68,3 +68,40 @@ export function fetchManifest(manifestId) {
       .catch(error => dispatch(receiveManifestFailure(manifestId, error)));
   });
 }
+//requestion collection actions
+export function requestCollection(collectionId) {
+  return {
+    type: ActionTypes.REQUEST_COLLECTION,
+    collectionId
+  };
+}
+
+export function receiveCollection(collectionId, collectionJson, parent) {
+  return {
+    type: ActionTypes.RECEIVE_COLLECTION,
+    collectionId,
+    collectionJson, // Wrap in manifesto??
+    parent
+  };
+}
+
+export function receiveCollectionFailure(collectionId, error) {
+  return {
+    type: ActionTypes.RECEIVE_COLLECTION_FAILURE,
+    collectionId,
+    error,
+  };
+}
+
+//if fetch collection is being called as sub collection of a parent collection
+// then the parent collection id should be passed in
+// if parent collection is to level than parent should be left undefined
+export function fetchCollection(collectionId, parent = undefined) {
+  return ((dispatch) => {
+    dispatch(requestCollection(collectionId));
+    return fetch(collectionId)
+      .then(response => response.json())
+      .then(json => dispatch(receiveCollection(collectionId, json)))
+      .catch(error => dispatch(receiveCollectionFailure(collectionId, error)));
+  });
+}
