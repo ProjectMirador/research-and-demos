@@ -9,7 +9,9 @@
     "test": "npm run lint && npm run build && npm run build:dev && node_modules/.bin/jest",
     "test:watch": "npm test -- --watch",
     "build": "node_modules/.bin/webpack",
-    "build:dev": "node_modules/.bin/webpack --config integrations.config.js"
+    "build:dev": "node_modules/.bin/webpack --config integrations.config.js",
+    "start": "npm run build && npm run build:dev && npm run server",
+    "start:fresh": "npm install && npm run build && npm run build:dev && npm run server"
   },
   "author": "Drew Winget <scipioaffricanus@gmail.com> (https://aeschylus.net/)",
   "license": "MIT",

@@ -1,44 +1,43 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
-import m3core from '../../../index.umd';
-
-class Display extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      formValue: '',
-      lastRequested: '',
-      content: 'Nothing Selected Yet',
-    };
-    m3core.store.subscribe(() => {
-      const manifest = m3core.store.getState().manifests[this.state.lastRequested];
-
-      if (manifest) {
-        if (manifest.isFetching) {
-          this.setState({
-            content: '☕',
-          });
-          return;
-        } else if (manifest.error) {
-          this.setState({
-            content: manifest.error.message,
-          });
-          return;
-        }
-
-        this.setState({
-          content: JSON.stringify(manifest.json, 0, 2),
-        });
-      }
-    });
+const displayContent = (manifest) => {
+  if (manifest) {
+    if (manifest.isFetching) {
+      return '☕';
+    } else if (manifest.error) {
+      return manifest.error.message;
+    }
+    return JSON.stringify(manifest.json, 0, 2);
   }
-  render() {
-    return (
+  return 'Nothing Selected Yet';
+};
+
+const stateClass = (manifest) => {
+  if (manifest) {
+    if (manifest.isFetching) {
+      return 'fetching';
+    } else if (manifest.error) {
+      return 'error';
+    }
+    return '';
+  }
+  return 'empty';
+};
+
+const Display = props => {
+  return (
       <div className="Display">
-            <img src="{ this.state.content.canvases[0].images[0].resource['@id'] }"/>
+      <pre id="exampleManifest" className={ stateClass(props.manifest) }>
+        { displayContent(props.manifest) }
+      </pre>
       </div>
-    );
-  }
-}
+  );
+};
+
+Display.propTypes = {
+  manifest: PropTypes.instanceOf(Object)
+};
 
 export default Display;

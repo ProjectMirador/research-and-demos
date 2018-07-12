@@ -4,7 +4,10 @@
   },
   "extends": "airbnb",
   "globals": {
-    page: true
+    "page": true
+  },
+  "settings": {
+    "jsx": true
   },
   "plugins": ["jest"]
 }
