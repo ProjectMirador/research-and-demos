@@ -9,5 +9,8 @@
   "settings": {
     "jsx": true
   },
-  "plugins": ["jest"]
+  "plugins": ["jest"],
+  "rules": {
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+  }
 }

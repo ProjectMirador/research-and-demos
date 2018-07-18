@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 const displayContent = (manifest) => {
@@ -26,18 +25,20 @@ const stateClass = (manifest) => {
   return 'empty';
 };
 
-const Display = props => {
-  return (
-      <div className="Display">
-      <pre id="exampleManifest" className={ stateClass(props.manifest) }>
-        { displayContent(props.manifest) }
-      </pre>
-      </div>
-  );
-};
+const Display = props => (
+  <div className="Display">
+    <pre id="exampleManifest" className={stateClass(props.manifest)}>
+      {displayContent(props.manifest)}
+    </pre>
+  </div>
+);
 
 Display.propTypes = {
-  manifest: PropTypes.instanceOf(Object)
+  manifest: PropTypes.oneOfType([null, PropTypes.object]),
+};
+
+Display.defaultProps = {
+  manifest: null,
 };
 
 export default Display;
