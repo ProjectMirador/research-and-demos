@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import m3core from '../../../index.umd';
+import { actions } from '../store';
 import Display from './Display';
 import ManifestForm from './ManifestForm';
 
@@ -63,7 +63,7 @@ const mapStateToProps = state => (
 
 const mapDispatchToProps = dispatch => ({
   fetchManifest: manifestUrl => (
-    dispatch(m3core.actions.fetchManifest(manifestUrl))
+    dispatch(actions.fetchManifest(manifestUrl))
   ),
 });
 
