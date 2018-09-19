@@ -3,11 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { actions } from '../store';
 import throttle from 'raf-throttle';
-
-let x = 0;
-let y = 0;
-let width = 200;
-let height = 200;
+import WindowNavBar from './WindowNavBar';
 
 const getThumbnailForManifest = (manifest) => {
   // TODO: use manifesto or some other spec
@@ -16,19 +12,6 @@ const getThumbnailForManifest = (manifest) => {
   // thumbnails
   return manifest.json.thumbnail['@id']
 }
-
-// const throttle = (func, limit) => {
-//   let inThrottle
-//   return function() {
-//     const args = arguments
-//     const context = this
-//     if (!inThrottle) {
-//       func.apply(context, args)
-//       inThrottle = true
-//       setTimeout(() => inThrottle = false, limit)
-//     }
-//   }
-// }
 
 const handleDragWindow = throttle((event, windowId, position, updateWindowPosition) => {
   let x = event.clientX - 400
@@ -43,10 +26,12 @@ const handleDragWindow = throttle((event, windowId, position, updateWindowPositi
  * @param {string} manifestId
  * @param {string} windowId
  * @param {array} position
- * @param {function} updateWindow
+ * @param {function} updateWindowPosition
  */
-const Window = ({ manifest, windowId, position, updateWindowPosition }) => (
-    <div
+const Window = ({ manifest, windowId, updateWindowPosition, windows }) => {
+  let window = windows.find((window)=> window.id === windowId)
+  let position = window.xywh
+  return (<div
       draggable="true"
       onDragStart={(event)=>{
       document.addEventListener("dragover", function(event) {
@@ -71,20 +56,11 @@ const Window = ({ manifest, windowId, position, updateWindowPosition }) => (
       style={{transform: 'translateX(' + position[0] +'px) translateY('+ position[1] + 'px)'}}
     >
     <img draggable="false" src={getThumbnailForManifest(manifest)}/>
-    <div className="window-controls">
-    <button
-  onClick={(event)=>{
-    console.log('clicked Previous')
-  }}
-  className="next-button" type="button">Previous</button>
-    <button
-  onClick={(event)=>{
-    console.log('clicked Next')
-  }}
-  className="previous-button" type="button">Next</button>
-    </div>
-    </div>
-);
+          <WindowNavBar
+            windowId={windowId}
+          />
+        </div>)
+};
 
 Window.propTypes = {
   manifest: PropTypes.object,
@@ -93,7 +69,7 @@ Window.propTypes = {
 
 const mapStateToProps = state => (
   {
-    position: state.windows[0].xywh // find way to select passed in window
+    windows: state.windows
   }
 );
 

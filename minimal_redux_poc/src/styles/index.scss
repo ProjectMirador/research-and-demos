@@ -20,7 +20,17 @@ body {
     right: 0;
 }
 
+.window-controls {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
 .mirador-window {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 200px;
     height: 200px;
     box-shadow: 0 0 10px gray;

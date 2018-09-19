@@ -17,7 +17,6 @@ const Workspace = ({ windows, manifests }) => (
           key={window.id}
           windowId={window.id}
           manifest={manifests[window.manifestId]}
-          position={window.position}
         />
       ))
     }
