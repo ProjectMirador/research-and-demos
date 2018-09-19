@@ -3,24 +3,26 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { actions } from '../store';
 
-const handleOpenButtonClick = (event, manifest, addWindow) => {
-  addWindow({});
+const handleOpenButtonClick = (event, manifestId, addWindow) => {
+  addWindow({
+    manifestId: manifestId
+  });
 }
 /**
  * Represents an item in a list of currently-loaded or loading manifests
  * @param {object} props
  * @param {object} [props.manifest = string]
  */
-const ManifestListItem = ({ manifest, addWindow}) => (
+const ManifestListItem = ({ manifestId, addWindow}) => (
   <li className="manifest-list-item">
-    <a href="#" onClick={(event) => handleOpenButtonClick(event, manifest, addWindow)}>
-      {manifest}
+    <a href="#" onClick={(event) => handleOpenButtonClick(event, manifestId, addWindow)}>
+      {manifestId}
     </a>
   </li>
 );
 
 ManifestListItem.propTypes = {
-  manifest: PropTypes.string.isRequired, // eslint-disable-line react/forbid-prop-types
+  manifestId: PropTypes.string.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
 const mapStateToProps = () => (

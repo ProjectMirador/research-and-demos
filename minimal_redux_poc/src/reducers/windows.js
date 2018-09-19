@@ -23,6 +23,15 @@ const windowsReducer = (state = [], action) => {
         }
         return window;
       });
+    case ActionTypes.UPDATE_WINDOW_POSITION:
+      return state.map((window) => {
+        if (window.id === action.windowId) {
+          return Object.assign({}, window, {
+            xywh: [action.position[0], action.position[1], 200, 200],
+          });
+        }
+        return window;
+      });
     default:
       return state;
   }
