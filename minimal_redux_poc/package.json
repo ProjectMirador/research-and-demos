@@ -6,7 +6,7 @@
   "scripts": {
     "lint": "node_modules/.bin/eslint ./",
     "server": "node_modules/.bin/http-server -p 4444",
-    "test": "npm run build && npm run lint && node_modules/.bin/jest",
+    "test": "npm run build && npm run lint && node_modules/.bin/jest && codecov",
     "test:watch": "npm test -- --watch",
     "build": "node_modules/.bin/webpack"
   },
@@ -20,6 +20,7 @@
     "node-fetch": "2.1.1",
     "node-sass": "^4.9.2",
     "prop-types": "^15.6.2",
+    "raf-throttle": "^2.0.3",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
     "react-redux": "^5.0.7",
@@ -60,6 +61,8 @@
     ],
     "testPathIgnorePatterns": [
       "__tests__/integration/react-example/.*jsx?"
-    ]
+    ],
+    "coverageDirectory": "./coverage/",
+    "collectCoverage": true
   }
 }

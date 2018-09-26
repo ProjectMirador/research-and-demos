@@ -29,12 +29,26 @@ export function addWindow(options) {
     id: `window.${new Date().valueOf()}`,
     canvasIndex: 0,
     collectionIndex: 0,
-    manifestIndex: 0,
+    manifestId: options.manifestId,
     rangeId: null,
-    xywh: null,
-    rotation: null,
+    xywh: [0, 0, 200, 200],
   };
   return { type: ActionTypes.ADD_WINDOW, payload: Object.assign({}, defaultOptions, options) };
+}
+
+/**
+ * updateWindowPosition - action creator
+ *
+ * @param  {String} windowId
+ * @param  {Array} position
+ * @memberof ActionCreators
+ */
+export function updateWindowPosition(windowId, position) {
+  return {
+    type: ActionTypes.UPDATE_WINDOW_POSITION,
+    windowId,
+    position,
+  };
 }
 
 /**

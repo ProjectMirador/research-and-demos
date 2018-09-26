@@ -1,3 +1,46 @@
 body {
-  background: lighten(red, 20%);
+  background: white;
+  margin: 0;
+  padding: 0;
+}
+
+#exampleManifest {
+    border: 1px solid black;
+    width: 300px;
+    overflow: scroll;
+}
+
+.mirador-workspace {
+    margin-left: 300px;
+    border: 1px solid black;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.window-controls {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.mirador-window {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 200px;
+    box-shadow: 0 0 10px gray;
+    text-align: center;
+    background: black;
+    overflow: hidden;
+    margin: 20px;
+    img {
+        width:200px;
+        mouse-events: none;
+
+    }
 }
