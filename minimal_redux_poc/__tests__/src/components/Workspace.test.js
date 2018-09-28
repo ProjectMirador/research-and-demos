@@ -1,20 +1,47 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { store } from '../../../src/store';
+// import { store } from '../../../src/store';
+import configureStore from 'redux-mock-store';
 import Workspace from '../../../src/components/Workspace';
 
 describe('Workspace', () => {
-  it('renders without an error', () => {
-    const wrapper = shallow(<Workspace store={store} />).dive();
-    expect(wrapper.find('div.mirador-workspace').length).toBe(1);
-    expect(wrapper.find('div.window').length).toBe(0);
-    // expect(wrapper.find('button').length).toBe(1);
-    // expect(wrapper.find('button').text()).toEqual('http://example.com');
+  const initialState = {
+    workspace: {},
+    manifests: {
+      'http://example.org': { },
+    },
+    windows: [
+      {
+        id: 'foo',
+        canvasIndex: 0,
+        collectionIndex: 0,
+        manifestIndex: 0,
+        rangeId: null,
+        xywh: null,
+        rotation: null,
+      },
+      {
+        id: 'bar',
+        canvasIndex: 0,
+        collectionIndex: 0,
+        manifestIndex: 0,
+        rangeId: null,
+        xywh: null,
+        rotation: null,
+      },
+    ],
+  };
+  const mockStore = configureStore();
+  let store;
+  let wrapper;
+
+  beforeEach(() => {
+    store = mockStore(initialState);
+    wrapper = shallow(<Workspace store={store} />);
   });
-  // it('updates and adds window div when window is added to store', () => {
-  //   const wrapper = shallow(<Workspace store={store} />).dive();
-  //   expect(store.getState().windows.length).toEqual(0);
-  //   wrapper.find('button').simulate('click');
-  //   expect(store.getState().windows.length).toEqual(1);
-  // });
+
+  it('renders without an error', () => {
+    expect(wrapper.find('div.mirador-workspace').length).toBe(1);
+    expect(wrapper.find('div.window').length).toBe(2);
+  });
 });
