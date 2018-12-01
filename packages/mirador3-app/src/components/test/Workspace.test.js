@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { actions, store } from 'mirador3-core';
-import Workspace from '../../../src/components/Workspace';
+import Workspace from '../Workspace';
 import fixture from './fixtures/2.json';
 
 describe('Workspace', () => {

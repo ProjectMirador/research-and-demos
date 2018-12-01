@@ -4,6 +4,9 @@
   "private": true,
   "dependencies": {
     "css-ns": "^1.2.2",
+    "enzyme": "^3.7.0",
+    "jest": "23.6.0",
+    "jest-fetch-mock": "^2.0.1",
     "mirador3-core": "file:../mirador3-core",
     "node-fetch": "2.1.1",
     "openseadragon": "^2.4.0",
@@ -28,12 +31,11 @@
     "css-loader": "1.0.0",
     "dotenv": "6.0.0",
     "dotenv-expand": "4.2.0",
-    "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.7.0",
     "eslint": "5.6.0",
+    "eslint-config-airbnb": "^17.1.0",
     "eslint-config-react-app": "^3.0.5",
     "eslint-loader": "2.1.1",
-    "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-flowtype": "2.50.1",
     "eslint-plugin-import": "2.14.0",
     "eslint-plugin-jest": "^22.1.0",
@@ -44,8 +46,7 @@
     "fs-extra": "7.0.0",
     "html-webpack-plugin": "4.0.0-alpha.2",
     "identity-obj-proxy": "3.0.0",
-    "jest": "23.6.0",
-    "jest-fetch-mock": "^2.0.1",
+    "jest-canvas-mock": "^1.1.0",
     "jest-pnp-resolver": "1.0.1",
     "jest-resolve": "23.6.0",
     "mini-css-extract-plugin": "0.4.3",
@@ -89,9 +90,9 @@
     ],
     "resolver": "jest-pnp-resolver",
     "setupFiles": [
-      "react-app-polyfill/jsdom"
+      "jest-canvas-mock"
     ],
-    "setupTestFrameworkScriptFile": "./setupTests.js",
+    "setupTestFrameworkScriptFile": "<rootDir>/src/setupTests.js",
     "testMatch": [
       "<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}",
       "<rootDir>/src/**/?(*.)(spec|test).{js,jsx,ts,tsx}"

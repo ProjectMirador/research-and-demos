@@ -7,8 +7,10 @@
     "page": true,
     "document": true
   },
+  "parser": "babel-eslint",
   "plugins": ["jest"],
   "rules": {
+    "global-require": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "require-jsdoc": ["error", {
       "require": {

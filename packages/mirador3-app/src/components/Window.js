@@ -15,7 +15,6 @@ class Window extends Component {
    */
   constructor(props) {
     super(props);
-
     this.miradorInstanceRef = React.createRef();
   }
 
