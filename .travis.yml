@@ -1,6 +1,12 @@
 language: node_js
 node_js:
-  - 'node'
+  - "8"
 before_script:
-  - cd minimal_redux_poc
   - npm install
+  - cd packages/mirador3-core
+  - npm install
+  - cd ../mirador3-app
+  - npm install
+  - cd ../..
+  - lerna run build
+script: lerna run test --stream

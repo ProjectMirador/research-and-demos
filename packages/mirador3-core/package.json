@@ -7,8 +7,9 @@
   "repository": "https://github.com/ProjectMirador/research-and-demos/mirador3-core",
   "scripts": {
     "lint": "node_modules/.bin/eslint ./",
-    "test": "npm run build && npm run lint && node_modules/.bin/jest",
-    "test:watch": "npm test -- --watch",
+    "test": "npm run lint && jest -c jest.json",
+    "test:watch": "jest -c jest.json --watch",
+    "test:coverage": "jest -c jest.json --coverage",
     "build": "node_modules/.bin/webpack",
     "build:watch": "node_modules/.bin/webpack --watch"
   },
@@ -45,44 +46,9 @@
     "webpack": "^4.24.0",
     "webpack-cli": "^3.1.2"
   },
-  "jest": {
-    "automock": false,
-    "setupTestFrameworkScriptFile": "<rootDir>/src/setupTests.js",
-    "collectCoverageFrom": [
-      "src/**/*.{js,jsx,ts,tsx}",
-      "!src/**/*.d.ts"
-    ],
-    "resolver": "jest-pnp-resolver",
-    "testMatch": [
-      "<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}",
-      "<rootDir>/src/**/?(*.)(spec|test).{js,jsx,ts,tsx}"
-    ],
-    "testEnvironment": "jsdom",
-    "testURL": "http://localhost",
-    "transform": {
-      "^.+\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/babel-jest",
-      "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
-      "^(?!.*\\.(js|jsx|ts|tsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
-    },
-    "transformIgnorePatterns": [
-      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|ts|tsx)$",
-      "^.+\\.module\\.(css|sass|scss)$"
-    ],
-    "moduleNameMapper": {
-      "^react-native$": "react-native-web",
-      "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy"
-    },
-    "moduleFileExtensions": [
-      "web.js",
-      "js",
-      "web.ts",
-      "ts",
-      "web.tsx",
-      "tsx",
-      "json",
-      "web.jsx",
-      "jsx",
-      "node"
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
     ]
   }
 }

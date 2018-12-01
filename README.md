@@ -1,6 +1,27 @@
 # research-and-demos
 Proofs of concept for Mirador 3
 
-1. git clone the repository
-2. Navigate to the relevant POC, for example, `cd minimal_redux_poc`
-3. Follow the README for that POC.
+## lerna
+lerna helps manage the Mirador3 "monorepo"
+
+### using lerna
+
+#### `$ lerna bootstrap`
+
+Link local packages together and installs package dependencies
+
+#### `$ lerna run build`
+
+build production packages
+
+#### `$ lerna run start`
+
+start the development mode application
+
+#### `$ lerna run test`
+
+lints and runs tests (use with --stream to see output)
+
+#### `$ lerna run test:coverage`
+
+runs test with coverage
