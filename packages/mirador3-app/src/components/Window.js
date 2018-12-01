@@ -22,38 +22,65 @@ class Window extends Component {
    * React lifecycle event
    */
   componentDidMount() {
-    if (!this.miradorInstanceRef.current) {
-      return false;
-    }
-    const viewer = OpenSeaDragon({
-      id: this.miradorInstanceRef.current.id,
-      showNavigationControl: false,
-    });
-    const that = this;
-    fetch(`${this.props.manifest.manifestation.getSequences()[0].getCanvases()[0].getImages()[0].getResource().getServices()[0].id}/info.json`)
-      .then(response => response.json())
-      .then((json) => {
-        viewer.addTiledImage({
-          tileSource: json,
-          success: (event) => {
-            const tiledImage = event.item;
+    this.instantiateViewer();
+    this.fetchTileSource();
+    return true;
+  }
 
-            /**
-             * A callback for the tile after its drawn
-             * @param  {[type]} e event object
-             */
-            const tileDrawnHandler = (e) => {
-              if (e.tiledImage === tiledImage) {
-                viewer.removeHandler('tile-drawn', tileDrawnHandler);
-                that.miradorInstanceRef.current.style.display = 'block';
-              }
-            };
-            viewer.addHandler('tile-drawn', tileDrawnHandler);
-          },
-        });
-      })
-      .catch(error => console.log(error));
-    return false;
+  /**
+   * React lifecycle event
+   */
+  componentDidUpdate(prevProps) {
+    if (this.props.manifest.manifestation !== prevProps.manifest.manifestation) {
+      this.instantiateViewer();
+      this.fetchTileSource();
+    }
+  }
+
+  /**
+   * instantiateViewer
+   */
+  instantiateViewer() {
+    if (this.miradorInstanceRef.current) {
+      this.viewer = OpenSeaDragon({
+        id: this.miradorInstanceRef.current.id,
+        showNavigationControl: false,
+      });
+    }
+  }
+
+  /**
+   * fetchTileSource
+   */
+  fetchTileSource() {
+    const { manifest } = this.props;
+    if (manifest.manifestation) {
+      fetch(
+        `${manifest.manifestation.getSequences()[0].getCanvases()[0].getImages()[0].getResource().getServices()[0].id}/info.json`,
+      )
+        .then(response => response.json())
+        .then((json) => {
+          this.viewer.addTiledImage({
+            tileSource: json,
+            success: (event) => {
+              const tiledImage = event.item;
+
+              /**
+               * A callback for the tile after its drawn
+               * @param  {[type]} e event object
+               */
+              const tileDrawnHandler = (e) => {
+                if (e.tiledImage === tiledImage) {
+                  this.viewer.removeHandler('tile-drawn', tileDrawnHandler);
+                  this.miradorInstanceRef.current.style.display = 'block';
+                }
+              };
+              this.viewer.addHandler('tile-drawn', tileDrawnHandler);
+            },
+          });
+        })
+        .catch(error => console.log(error));
+    }
   }
 
   /**
@@ -76,20 +103,24 @@ class Window extends Component {
    * @param {object} props (from react/redux)
    */
   render() {
-    return (
-      <div className={ns('window')} style={this.styleAttributes()}>
-        <div className={ns('window-heading')}>
-          <h3>{this.props.manifest.manifestation.getLabel().map(label => label.value)[0]}</h3>
+    const { manifest, window } = this.props;
+    if (manifest.manifestation) {
+      return (
+        <div className={ns('window')} style={this.styleAttributes()}>
+          <div className={ns('window-heading')}>
+            <h3>{manifest.manifestation.getLabel().map(label => label.value)[0]}</h3>
+          </div>
+          <img src={this.thumbnail()} alt="" />
+          <div
+            className={ns('osd-container')}
+            style={{ display: 'none' }}
+            id={`${window.id}-osd`}
+            ref={this.miradorInstanceRef}
+          />
         </div>
-        <img src={this.thumbnail()} alt="" />
-        <div
-          className={ns('osd-container')}
-          style={{ display: 'none' }}
-          id={`${this.props.window.id}-osd`}
-          ref={this.miradorInstanceRef}
-        />
-      </div>
-    );
+      );
+    }
+    return null;
   }
 }
 

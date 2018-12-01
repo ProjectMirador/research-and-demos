@@ -13,7 +13,6 @@
     "build:watch": "node_modules/.bin/webpack --watch"
   },
   "dependencies": {
-    "jest-fetch-mock": "^2.0.1",
     "manifesto.js": "^3.0.9",
     "node-fetch": "2.1.1",
     "redux-thunk": "2.2.0",
@@ -37,6 +36,7 @@
     "eslint-plugin-jsx-a11y": "^6.1.2",
     "eslint-plugin-react": "^7.11.1",
     "jest": "23.6.0",
+    "jest-fetch-mock": "^2.0.1",
     "jest-pnp-resolver": "1.0.1",
     "jest-resolve": "23.6.0",
     "jsdom": "^13.0.0",

@@ -13,7 +13,7 @@ describe('Window', () => {
     [window] = store.getState().windows;
     wrapper = mount(
       <Window store={store} id={window.id} />,
-      { attachTo: document.body }
+      { attachTo: document.body },
     );
   });
 

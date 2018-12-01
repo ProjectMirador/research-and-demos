@@ -21,8 +21,6 @@ class App extends Component {
     this.state = {
       lastRequested: '',
     };
-
-    this.setLastRequested = this.setLastRequested.bind(this);
   }
 
   /**
@@ -30,7 +28,7 @@ class App extends Component {
    *
    * @private
    */
-  setLastRequested(requested) {
+  setLastRequested = (requested) => {
     this.setState({
       lastRequested: requested,
     });
