@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { actions } from '../store';
+import { actions } from 'mirador3-core';
 import ns from '../config/css-ns';
 
 

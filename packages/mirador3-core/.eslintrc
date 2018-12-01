@@ -1,0 +1,26 @@
+{
+  "env": {
+    "jest/globals": true
+  },
+  "extends": "airbnb",
+  "globals": {
+    "page": true,
+    "document": true
+  },
+  "plugins": ["jest"],
+  "rules": {
+    "no-console": "off",
+    "global-require": "off",
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "require-jsdoc": ["error", {
+      "require": {
+        "FunctionDeclaration": true,
+        "MethodDefinition": true,
+        "ClassDeclaration": true,
+        "ArrowFunctionExpression": true,
+        "FunctionExpression": true
+      }
+    }],
+    "react/prefer-stateless-function": "off"
+  }
+}

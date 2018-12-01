@@ -1,8 +1,8 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
-import { actions, store } from '../../../src/store';
-import Window from '../../../src/components/Window';
-import fixture from '../../fixtures/24.json';
+import { actions, store } from 'mirador3-core';
+import Window from '../Window';
+import fixture from './fixtures/24.json';
 
 describe('Window', () => {
   let wrapper;
@@ -13,8 +13,7 @@ describe('Window', () => {
     [window] = store.getState().windows;
     wrapper = mount(
       <Window store={store} id={window.id} />,
-      // We need to attach this to something created by our JSDOM instance
-      { attachTo: document.getElementById('main') },
+      { attachTo: document.body },
     );
   });
 

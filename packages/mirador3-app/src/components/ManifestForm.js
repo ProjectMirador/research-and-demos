@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { actions } from '../store';
+import { actions } from 'mirador3-core';
 
 /**
  * Provides a form for user input of a manifest url
@@ -17,9 +17,6 @@ class ManifestForm extends Component {
     this.state = {
       formValue: '',
     };
-
-    this.formSubmit = this.formSubmit.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
   }
 
   /**
@@ -27,7 +24,7 @@ class ManifestForm extends Component {
    * @param  {Event} event
    * @private
    */
-  formSubmit(event) {
+  formSubmit = (event) => {
     event.preventDefault();
     this.props.fetchManifest(this.state.formValue);
     this.props.setLastRequested(this.state.formValue);
@@ -38,7 +35,7 @@ class ManifestForm extends Component {
    * @param  {Event} event
    * @private
    */
-  handleInputChange(event) {
+  handleInputChange = (event) => {
     const that = this;
     event.preventDefault();
     that.setState({

@@ -1,8 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { actions, store } from '../../../src/store';
-import ManifestMetadata from '../../../src/components/ManifestMetadata';
-import fixture from '../../fixtures/2.json';
+import { actions, store } from 'mirador3-core';
+import ManifestMetadata from '../ManifestMetadata';
+import fixture from './fixtures/2.json';
 
 describe('ManifestMetadata', () => {
   let wrapper;

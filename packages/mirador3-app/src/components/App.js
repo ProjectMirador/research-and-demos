@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { actions } from '../store';
+import { actions } from 'mirador3-core';
 import Display from './Display';
 import ManifestForm from './ManifestForm';
 import ManifestListItem from './ManifestListItem';
@@ -21,8 +21,6 @@ class App extends Component {
     this.state = {
       lastRequested: '',
     };
-
-    this.setLastRequested = this.setLastRequested.bind(this);
   }
 
   /**
@@ -30,7 +28,7 @@ class App extends Component {
    *
    * @private
    */
-  setLastRequested(requested) {
+  setLastRequested = (requested) => {
     this.setState({
       lastRequested: requested,
     });
@@ -47,7 +45,8 @@ class App extends Component {
     if (manifest) {
       if (manifest.isFetching) {
         return '☕';
-      } else if (manifest.error) {
+      }
+      if (manifest.error) {
         return manifest.error.message;
       }
       return JSON.stringify(manifest.json, 0, 2);
