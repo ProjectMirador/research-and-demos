@@ -1,0 +1,21 @@
+<html>
+
+<head>
+	<title>Mirador</title>
+  <!-- <link href="/static/styles.css" rel="stylesheet" /> -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+	<div id='mirador'>
+	</div>
+	<script src="/static/<%=bundle%>.bundle.js"></script>
+	<script type="text/javascript">
+      Mirador({
+        id: 'mirador',
+        plugins: ['HelloWorld']
+      });
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,23 @@
+{
+  "name": "mirador3-e2e-tests",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "node src/start.js",
+    "test:ci": "npm run start:prod & cypress run cypress.json && kill $!",
+    "cypress:open": "npm run start & cypress open && kill $!"
+  },
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "file-loader": "2.0.0",
+    "serve-favicon": "^2.5.0",
+    "webpack": "^4.26.1",
+    "html-webpack-plugin": "^3.2.0",
+    "webpack-dev-middleware": "^3.4.0",
+    "webpack-hot-middleware": "^2.24.3"
+  },
+  "devDependencies": {
+    "cypress": "^3.1.2"
+  }
+}

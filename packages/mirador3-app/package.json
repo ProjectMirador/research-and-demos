@@ -65,11 +65,13 @@
     "terser-webpack-plugin": "1.1.0",
     "url-loader": "1.1.1",
     "webpack": "4.19.1",
+    "webpack-cli": "^3.1.2",
     "webpack-dev-server": "3.1.9",
     "webpack-manifest-plugin": "2.0.4",
     "workbox-webpack-plugin": "3.6.3"
   },
   "scripts": {
+    "dist": "node_modules/.bin/webpack --config ./config/webpack.config.dist.js",
     "lint": "node_modules/.bin/eslint ./",
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
@@ -86,7 +88,7 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-   "babel": {
+  "babel": {
     "presets": [
       "react-app"
     ]
