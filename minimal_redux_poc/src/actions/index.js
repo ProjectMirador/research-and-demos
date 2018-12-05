@@ -1,5 +1,5 @@
-import fetch from 'node-fetch';
 import ActionTypes from '../action-types';
+import ManifestFetcher from '../lib/ManifestFetcher';
 
 /**
  * Action Creators for Mirador
@@ -119,8 +119,7 @@ export function receiveManifestFailure(manifestId, error) {
 export function fetchManifest(manifestId) {
   return ((dispatch) => {
     dispatch(requestManifest(manifestId));
-    return fetch(manifestId)
-      .then(response => response.json())
+    return new ManifestFetcher('v3').fetch(manifestId)
       .then(json => dispatch(receiveManifest(manifestId, json)))
       .catch(error => dispatch(receiveManifestFailure(manifestId, error)));
   });
