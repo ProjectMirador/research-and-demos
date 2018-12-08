@@ -103,8 +103,8 @@ const mapStateToProps = state => (
  * @private
  */
 const mapDispatchToProps = dispatch => ({
-  fetchManifest: manifestUrl => (
-    dispatch(actions.fetchManifest(manifestUrl))
+  fetchManifest: (manifestUrl, manifestRequestVersion) => (
+    dispatch(actions.fetchManifest(manifestUrl, manifestRequestVersion))
   ),
 });
 

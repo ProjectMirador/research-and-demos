@@ -135,12 +135,13 @@ export function receiveManifestFailure(manifestId, error) {
  * fetchManifest - action creator
  *
  * @param  {String} manifestId
+ * @param  {String} manifestRequestVersion
  * @memberof ActionCreators
  */
-export function fetchManifest(manifestId) {
+export function fetchManifest(manifestId, manifestRequestVersion) {
   return ((dispatch) => {
     dispatch(requestManifest(manifestId));
-    return new ManifestFetcher('v3').fetch(manifestId)
+    return new ManifestFetcher(manifestRequestVersion).fetch(manifestId)
       .then(json => dispatch(receiveManifest(manifestId, json)))
       .catch(error => dispatch(receiveManifestFailure(manifestId, error)));
   });
