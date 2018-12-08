@@ -6,8 +6,10 @@ before_script:
   - cd packages/mirador3-core
   - npm install
   - cd ../mirador3-common
-    npm install
-  - cd ../mirador3-app
+  - npm install
+  - cd ../mirador3-app-base
+  - npm install
+  - cd ../mirador3-e2e-tests
   - npm install
   - cd ../..
   - lerna run build

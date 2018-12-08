@@ -26,6 +26,6 @@
       }
     }],
     "react/prefer-stateless-function": "off",
-    "react/destructuring-assignment": [false, "never"]
+    "react/destructuring-assignment": [0, "never"]
   }
 }

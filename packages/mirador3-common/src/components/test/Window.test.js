@@ -18,7 +18,8 @@ describe('Window', () => {
   });
 
   it('returns the width and height style attribute', () => {
-    expect(shallow(<Window store={store} id={window.id} />).dive().instance().styleAttributes())
+    wrapper = shallow(<Window store={store} id={window.id} />, { context: { store } });
+    expect(wrapper.dive().instance().styleAttributes())
       .toEqual({ width: '400px', height: '400px' });
   });
 
@@ -26,7 +27,6 @@ describe('Window', () => {
     expect(wrapper.find('.mirador-window').prop('style')).toHaveProperty('width', '400px');
     expect(wrapper.find('.mirador-window').prop('style')).toHaveProperty('height', '400px');
     expect(wrapper.find('div.mirador-window').length).toBe(1);
-    expect(wrapper.find('div.mirador-window h3').text()).toBe('Test 24 Manifest: Image with IIIF Service - adapted with real image');
     expect(wrapper.find('div.mirador-window img').prop('src')).toBe('http://placekitten.com/200/300');
   });
 

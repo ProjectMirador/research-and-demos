@@ -10,8 +10,8 @@
     "test": "npm run lint && jest -c jest.json",
     "test:watch": "jest -c jest.json --watch",
     "test:coverage": "jest -c jest.json --coverage",
-    "build": "node_modules/.bin/webpack",
-    "build:watch": "node_modules/.bin/webpack --watch"
+    "build": "webpack",
+    "build:watch": "webpack --watch"
   },
   "dependencies": {
     "jest-fetch-mock": "^2.0.1",
