@@ -29,20 +29,19 @@ class WindowTopBarComponent extends React.Component {
     );
   }
 }
-//
-// /**
-//  * mapStateToProps - used to hook up connect to action creators
-//  * @memberof Window
-//  * @private
-//  */
-// const mapStateToProps = ({ windows, manifests }, props) => {
-//   const window = windows.find(win => props.windowId === win.id);
-//   return {
-//     window,
-//     //
-//     manifest: manifests[window.manifestId],
-//   };
-// };
+
+/**
+ * mapStateToProps - used to hook up connect to action creators
+ * @memberof Window
+ * @private
+*/
+const mapStateToProps = ({ windows, manifests }, props) => {
+  const window = windows.find(win => props.windowId === win.id);
+  return {
+    window,
+    manifest: manifests[window.manifestId],
+  };
+};
 
 /**
  * mapDispatchToProps - used to hook up connect to action creators
@@ -66,4 +65,4 @@ WindowTopBarComponent.defaultProps = {
 };
 
 
-export const WindowTopBar = connect(null, mapDispatchToProps)(WindowTopBarComponent);
+export const WindowTopBar = connect(mapStateToProps, mapDispatchToProps)(WindowTopBarComponent);

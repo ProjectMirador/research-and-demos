@@ -9,7 +9,6 @@ import { ns } from '../config/css-ns';
 export class ManifestMetadata extends React.Component {
   /**
    * Renders things
-   * @param {object} props
    */
   render() {
     const { manifest } = this.props;

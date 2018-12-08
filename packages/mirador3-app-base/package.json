@@ -2,6 +2,7 @@
   "name": "mirador3-app-base",
   "version": "0.1.0",
   "private": true,
+  "main": "lib/index.js",
   "dependencies": {
     "mirador3-core": "file:../mirador3-core",
     "mirador3-common": "file:../mirador3-common",
@@ -72,6 +73,7 @@
   },
   "scripts": {
     "dist": "webpack --config ./config/webpack.config.dist.js",
+    "lib": "node scripts/buildLib.js",
     "lint": "node_modules/.bin/eslint ./",
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",

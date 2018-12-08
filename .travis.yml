@@ -13,11 +13,14 @@ before_script:
   - npm install
   - cd ../mirador3-app-base
   - npm install
-  - cd ../mirador3-e2e-tests
-  - npm install
   - cd ../..
-  - lerna run build
+  - lerna run build --ignore=mirador3-e2e-tests
+  - lerna run lib
+  - cd packages/mirador3-e2e-tests
+  - npm install
+  - npm run build
 script:
+  - cd ../..
   - lerna run test --stream
   - cd packages/mirador3-e2e-tests
   - npm run cypress:record

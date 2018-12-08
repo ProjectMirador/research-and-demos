@@ -1,7 +1,7 @@
 {
   "name": "mirador3-core",
   "version": "0.1.0",
-  "description": "",
+  "description": "Mirador Core",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "repository": "https://github.com/ProjectMirador/research-and-demos/mirador3-core",

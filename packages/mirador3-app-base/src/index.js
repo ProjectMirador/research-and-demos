@@ -1,9 +1,8 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { store } from 'mirador3-core';
-import App from './components/App';
-import './styles/index.scss';
+import { App } from './components/App';
 
 const config = require('./mirador-config.json');
 /**

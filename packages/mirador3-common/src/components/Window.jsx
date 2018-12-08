@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import fetch from 'node-fetch';
 import OpenSeaDragon from 'openseadragon';
 import { ns } from '../config/css-ns';
+import { WindowTopBar } from './WindowTopBar';
 
 /**
  * Represents a Window in the mirador workspace
@@ -100,16 +101,17 @@ class WindowComponent extends React.Component {
 
   /**
    * Renders things
-   * @param {object} props (from react/redux)
    */
   render() {
-    const { manifest, window } = this.props;
+    const { manifest, window, store } = this.props;
     if (manifest.manifestation) {
       return (
         <div className={ns('window')} style={this.styleAttributes()}>
-          <div className={ns('window-heading')}>
-            <h3>{manifest.manifestation.getLabel().map(label => label.value)[0]}</h3>
-          </div>
+          <WindowTopBar
+            windowId={window.id}
+            manifest={manifest}
+            store={store}
+          />
           <img src={this.thumbnail()} alt="" />
           <div
             className={ns('osd-container')}
@@ -127,6 +129,7 @@ class WindowComponent extends React.Component {
 WindowComponent.propTypes = {
   window: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   manifest: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+  store: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
 WindowComponent.defaultProps = {

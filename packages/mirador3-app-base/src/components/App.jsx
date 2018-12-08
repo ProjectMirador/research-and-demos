@@ -1,14 +1,15 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { actions } from 'mirador3-core';
-import { Display, ManifestForm, ManifestListItem, Workspace, ns } from 'mirador3-common'
+import { Display, ManifestForm, ManifestListItem, Workspace, ns } from 'mirador3-common';
+import '../styles/index.scss';
 
 /**
  * This is the top level Mirador component.
  * @prop {Object} manifests
  */
-class App extends Component {
+class AppComponent extends React.Component {
   /**
    * constructor -
    */
@@ -28,7 +29,7 @@ class App extends Component {
     this.setState({
       lastRequested: requested,
     });
-  }
+  };
 
   /**
    * computedContent - computes the content to be displayed based on logic
@@ -51,7 +52,8 @@ class App extends Component {
   }
 
   buildManifestList() {
-    return Object.keys(this.props.manifests).map(manifest => (
+    const { manifests } = this.props;
+    return Object.keys(manifests).map(manifest => (
       <ManifestListItem key={manifest} manifest={manifest}/>));
   }
 
@@ -65,7 +67,7 @@ class App extends Component {
         <Workspace />
         <div className={ns('control-panel')}>
           <ManifestForm setLastRequested={this.setLastRequested} />
-          <ul>{this.buildManifestList}</ul>
+          <ul>{this.buildManifestList()}</ul>
           <Display
             manifest={this.props.manifests[this.state.lastRequested]}
           />
@@ -75,7 +77,7 @@ class App extends Component {
   }
 }
 
-App.propTypes = {
+AppComponent.propTypes = {
   manifests: PropTypes.instanceOf(Object).isRequired,
 };
 
@@ -101,7 +103,7 @@ const mapDispatchToProps = dispatch => ({
   ),
 });
 
-export default connect(
+export const App = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(App);
+)(AppComponent);
