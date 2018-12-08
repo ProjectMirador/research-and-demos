@@ -7,8 +7,8 @@ module.exports = {
   start: (port) => {
     const app = express();
     app.set('view engine', 'ejs');
-    app.set('views', __dirname + '/views');
-    app.use(favicon(__dirname + '/favicon.ico'));
+    app.set('views', `${__dirname}/views`);
+    app.use(favicon(`${__dirname}/favicon.ico`));
     app.get('/', (req, res) => {
       res.render('index', {
         apps,

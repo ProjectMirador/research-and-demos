@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
-import ns from '../config/css-ns';
+import { ns } from '../config/css-ns';
 
 /**
  * ManifestMetadata
  * @param {object} window
  */
-export default class ManifestMetadata extends Component {
+export class ManifestMetadata extends React.Component {
   /**
    * Renders things
    * @param {object} props

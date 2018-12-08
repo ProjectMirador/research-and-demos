@@ -1,15 +1,10 @@
 {
-  "name": "mirador3-app",
+  "name": "mirador3-app-base",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "css-ns": "^1.2.2",
-    "enzyme": "^3.7.0",
-    "jest": "23.6.0",
-    "jest-fetch-mock": "^2.0.1",
     "mirador3-core": "file:../mirador3-core",
-    "node-fetch": "2.1.1",
-    "openseadragon": "^2.4.0",
+    "mirador3-common": "file:../mirador3-common",
     "prop-types": "^15.6.2",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",

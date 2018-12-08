@@ -4,11 +4,11 @@
 starts server and runs cypress
 
 ### Notes:
-webpack is not used here yet, though a configuration is included.
+Apps are configured in the apps.json.
+To build `npm run build`
 
-Currently, `dist` contains the common-js pre-built binary produced by `mirador3-app` with the `npm run dist` command.
-
-The server uses the index template from views that loads the binary from dist and loads default Mirador export.
+The server uses the index template from views that loads a distribution app using a parameter.  So `http://localhost:4000/mirador-base` resolves
+to the bundle `mirador-base.bundle.js` in dist.
 
 Optimally, `apps` will contain different source Apps that will be built with webpack from ES6 imports
 using a published mirador3-app artifact.

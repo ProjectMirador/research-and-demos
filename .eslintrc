@@ -7,9 +7,13 @@
     "page": true,
     "document": true
   },
+  "parser": "babel-eslint",
   "plugins": ["jest"],
   "rules": {
     "no-console": "off",
+    "import/no-named-export": 0,
+    "import/no-named-as-default": 0,
+    "import/prefer-default-export": 0,
     "global-require": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "require-jsdoc": ["error", {
@@ -21,6 +25,7 @@
         "FunctionExpression": true
       }
     }],
-    "react/prefer-stateless-function": "off"
+    "react/prefer-stateless-function": "off",
+    "react/destructuring-assignment": [false, "never"]
   }
 }

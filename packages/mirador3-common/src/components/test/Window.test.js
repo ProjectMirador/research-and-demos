@@ -1,7 +1,7 @@
-import React from 'react';
+import * as React from 'react';
 import { mount, shallow } from 'enzyme';
 import { actions, store } from 'mirador3-core';
-import Window from '../Window';
+import { Window } from '../Window';
 import fixture from './fixtures/24.json';
 
 describe('Window', () => {

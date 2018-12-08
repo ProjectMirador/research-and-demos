@@ -1,15 +1,15 @@
-import React from 'react';
+import * as React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Window from './Window';
-import ns from '../config/css-ns';
+import { Window } from './Window';
+import { ns } from '../config/css-ns';
 
 /**
  * Represents a work area that contains any number of windows
  * @memberof Workspace
  * @private
  */
-const Workspace = ({ windows }) => (
+const WorkspaceComponent = ({ windows }) => (
   <div className={ns('workspace')}>
     {
       windows.map(window => (
@@ -22,7 +22,7 @@ const Workspace = ({ windows }) => (
   </div>
 );
 
-Workspace.propTypes = {
+WorkspaceComponent.propTypes = {
   windows: PropTypes.instanceOf(Array).isRequired,
 };
 
@@ -37,4 +37,4 @@ const mapStateToProps = state => (
   }
 );
 
-export default connect(mapStateToProps)(Workspace);
+export const Workspace = connect(mapStateToProps)(WorkspaceComponent);

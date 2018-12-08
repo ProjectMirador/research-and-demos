@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import fetch from 'node-fetch';
 import OpenSeaDragon from 'openseadragon';
-import ns from '../config/css-ns';
+import { ns } from '../config/css-ns';
 
 /**
  * Represents a Window in the mirador workspace
  * @param {object} window
  */
-class Window extends Component {
+class WindowComponent extends React.Component {
   /**
    * @param {Object} props [description]
    */
@@ -124,12 +124,12 @@ class Window extends Component {
   }
 }
 
-Window.propTypes = {
+WindowComponent.propTypes = {
   window: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   manifest: PropTypes.object, // eslint-disable-line react/forbid-prop-types
 };
 
-Window.defaultProps = {
+WindowComponent.defaultProps = {
   manifest: null,
 };
 
@@ -146,4 +146,4 @@ const mapStateToProps = ({ windows, manifests }, props) => {
   };
 };
 
-export default connect(mapStateToProps)(Window);
+export const Window = connect(mapStateToProps)(WindowComponent);

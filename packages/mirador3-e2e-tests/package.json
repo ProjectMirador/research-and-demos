@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "build": "NODE_ENV=production webpack --config ./webpack.config.js",
     "start": "node src/start.js",
+    "stop": "pkill --signal SIGINT server",
     "test:ci": "npm run start:prod & cypress run cypress.json && kill $!",
     "cypress:open": "npm run start & cypress open && kill $!"
   },
@@ -11,13 +13,39 @@
     "ejs": "^2.6.1",
     "express": "^4.16.4",
     "file-loader": "2.0.0",
+    "mirador3-core": "file:../mirador3-core",
+    "mirador3-common": "file:../mirador3-common",
+    "prop-types": "^15.6.2",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "redux": "3.7.2",
+    "react-redux": "^5.0.7",
     "serve-favicon": "^2.5.0",
+    "style-loader": "0.23.0",
     "webpack": "^4.26.1",
     "html-webpack-plugin": "^3.2.0",
     "webpack-dev-middleware": "^3.4.0",
     "webpack-hot-middleware": "^2.24.3"
   },
   "devDependencies": {
-    "cypress": "^3.1.2"
+    "babel-loader": "^8.0.4",
+    "@babel/plugin-proposal-class-properties": "^7.2.1",
+    "@babel/core": "^7.1.6",
+    "@babel/preset-env": "^7.1.6",
+    "@babel/preset-react": "7.0.0",
+    "css-loader": "1.0.0",
+    "cypress": "^3.1.2",
+    "node-sass": "^4.9.4",
+    "sass-loader": "7.1.0",
+    "webpack-cli": "^3.1.2"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ],
+    "plugins": [
+      "@babel/plugin-proposal-class-properties"
+    ]
   }
 }

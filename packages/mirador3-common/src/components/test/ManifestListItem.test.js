@@ -1,7 +1,7 @@
-import React from 'react';
+import * as React from 'react';
 import { shallow } from 'enzyme';
 import { store } from 'mirador3-core';
-import ManifestListItem from '../ManifestListItem';
+import { ManifestListItem } from '../ManifestListItem';
 
 describe('ManifestListItem', () => {
   it('renders without an error', () => {

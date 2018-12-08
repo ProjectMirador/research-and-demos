@@ -1,13 +1,21 @@
+const fs = require('fs');
 const path = require('path');
 const webpack = require('webpack');
 const apps = require('./apps');
 
+const appDirectory = fs.realpathSync(process.cwd());
+/**
+ *
+ * @param relativePath
+ * @returns {string}
+ */
+const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
 const isProduction = process.env.NODE_ENV === 'production';
 const entries = {
 };
 apps.forEach((app) => {
   entries[app] = [
-    path.join(__dirname, '/src/apps/'+app),
+    path.join(__dirname, `/src/apps/${app}`),
   ];
   !isProduction && entries[app].unshift(
     'webpack-hot-middleware/client?reload=true',
@@ -34,7 +42,7 @@ module.exports = {
     new webpack.NoEmitOnErrorsPlugin(),
   ],
   resolve: {
-    extensions: ['.js', '.ts', '.tsx', '.webpack.js', '.web.js'],
+    extensions: ['.jsx', '.js', '.ts', '.tsx', '.webpack.js', '.web.js'],
     modules: [
       path.resolve(__dirname, './node_modules'),
     ],
@@ -44,9 +52,14 @@ module.exports = {
       {
         oneOf: [
           {
-            test: /\.jsx?$/,
-            exclude: /(node_modules)/,
-            loader: 'babel-loader',
+            test: /\.(js|mjs|jsx|ts|tsx)$/,
+            loader: require.resolve('babel-loader'),
+            include: resolveApp('src'),
+            options: {
+              cacheDirectory: true,
+              cacheCompression: true,
+              compact: true,
+            },
           },
           {
             test: /\.scss$/,
@@ -58,10 +71,6 @@ module.exports = {
           },
           {
             loader: require.resolve('file-loader'),
-            // Exclude `js` files to keep "css" loader working as it injects
-            // it's runtime that would otherwise be processed through "file" loader.
-            // Also exclude `html` and `json` extensions so they get processed
-            // by webpacks internal loaders.
             exclude: [/\.(js|mjs|jsx|ts|tsx)$/, /\.html$/, /\.json$/],
             options: {
               name: 'static/media/[name].[hash:8].[ext]',

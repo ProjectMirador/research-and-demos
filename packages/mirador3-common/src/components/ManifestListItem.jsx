@@ -1,8 +1,8 @@
-import React from 'react';
+import * as React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { actions } from 'mirador3-core';
-import ns from '../config/css-ns';
+import { ns } from '../config/css-ns';
 
 
 /**
@@ -23,7 +23,7 @@ const handleOpenButtonClick = (event, manifest, addWindow) => {
  * @memberof ManifestListItem
  * @private
  */
-const ManifestListItem = ({ manifest, addWindow }) => (
+const ManifestListItemComponent = ({ manifest, addWindow }) => (
   <li className={ns('manifest-list-item')}>
     <button type="button" onClick={event => handleOpenButtonClick(event, manifest, addWindow)}>
       {manifest}
@@ -31,7 +31,7 @@ const ManifestListItem = ({ manifest, addWindow }) => (
   </li>
 );
 
-ManifestListItem.propTypes = {
+ManifestListItemComponent.propTypes = {
   manifest: PropTypes.string.isRequired, // eslint-disable-line react/forbid-prop-types
   addWindow: PropTypes.func.isRequired,
 };
@@ -56,7 +56,7 @@ const mapDispatchToProps = dispatch => ({
   ),
 });
 
-export default connect(
+export const ManifestListItem = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(ManifestListItem);
+)(ManifestListItemComponent);

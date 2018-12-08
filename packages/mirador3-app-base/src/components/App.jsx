@@ -2,11 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { actions } from 'mirador3-core';
-import Display from './Display';
-import ManifestForm from './ManifestForm';
-import ManifestListItem from './ManifestListItem';
-import Workspace from './Workspace';
-import ns from '../config/css-ns';
+import { Display, ManifestForm, ManifestListItem, Workspace, ns } from 'mirador3-common'
 
 /**
  * This is the top level Mirador component.

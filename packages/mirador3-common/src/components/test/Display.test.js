@@ -1,7 +1,7 @@
-import React from 'react';
+import * as React from 'react';
 import { shallow } from 'enzyme';
-import Display from '../Display';
-import ManifestMetadata from '../ManifestMetadata';
+import { Display } from '../Display';
+import { ManifestMetadata } from '../ManifestMetadata';
 import fixture from './fixtures/2.json';
 
 describe('Display', () => {

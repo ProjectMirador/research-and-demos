@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { actions } from 'mirador3-core';
@@ -8,7 +8,7 @@ import { actions } from 'mirador3-core';
  * @prop {Function} fetchManifest
  * @prop {Function} setLastRequested
  */
-class ManifestForm extends Component {
+class ManifestFormComponent extends React.Component {
   /**
    * constructor -
    */
@@ -62,7 +62,7 @@ class ManifestForm extends Component {
   }
 }
 
-ManifestForm.propTypes = {
+ManifestFormComponent.propTypes = {
   fetchManifest: PropTypes.func.isRequired,
   setLastRequested: PropTypes.func.isRequired,
 };
@@ -87,7 +87,7 @@ const mapDispatchToProps = dispatch => ({
   ),
 });
 
-export default connect(
+export const ManifestForm = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(ManifestForm);
+)(ManifestFormComponent);
