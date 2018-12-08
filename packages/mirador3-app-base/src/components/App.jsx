@@ -50,24 +50,22 @@ class App extends Component {
     return 'Nothing Selected Yet';
   }
 
+  buildManifestList() {
+    return Object.keys(this.props.manifests).map(manifest => (
+      <ManifestListItem key={manifest} manifest={manifest}/>));
+  }
+
   /**
    * render
    * @return {String} - HTML markup for the component
    */
   render() {
-    const manifestList = Object.keys(this.props.manifests).map(manifest => (
-      <ManifestListItem
-        key={manifest}
-        manifest={manifest}
-      />
-    ));
     return (
       <div className={ns('app')}>
         <Workspace />
         <div className={ns('control-panel')}>
           <ManifestForm setLastRequested={this.setLastRequested} />
-          <ul>{manifestList}</ul>
-
+          <ul>{this.buildManifestList}</ul>
           <Display
             manifest={this.props.manifests[this.state.lastRequested]}
           />

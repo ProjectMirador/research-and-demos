@@ -1,6 +1,10 @@
 language: node_js
 node_js:
   - "node"
+cache:
+  npm: true
+  directories:
+    - ~/.cache
 before_script:
   - npm install
   - cd packages/mirador3-core
@@ -13,4 +17,7 @@ before_script:
   - npm install
   - cd ../..
   - lerna run build
-script: lerna run test --stream
+script:
+  - lerna run test --stream
+  - cd packages/mirador3-e2e-tests
+  - npm run cypress:record

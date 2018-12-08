@@ -4,5 +4,6 @@
   "reporterOptions": {
     "mochaFile": "e2e-results.xml",
     "toConsole": true
-  }
+  },
+  "projectId": "epruij"
 }

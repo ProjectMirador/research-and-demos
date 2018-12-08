@@ -5,9 +5,10 @@
   "scripts": {
     "build": "NODE_ENV=production webpack --config ./webpack.config.js",
     "start": "node src/start.js",
-    "stop": "pkill --signal SIGINT server",
+    "stop": "pkill --signal SIGINT serverjs",
     "test:ci": "npm run start:prod & cypress run cypress.json && kill $!",
-    "cypress:open": "npm run start & cypress open && kill $!"
+    "cypress:open": "npm run start & cypress open && kill $!",
+    "cypress:record": "npm run start & cypress run --record --key 1d0533b4-bffb-41c8-954b-dc6782b93058"
   },
   "dependencies": {
     "ejs": "^2.6.1",
