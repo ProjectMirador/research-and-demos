@@ -19,6 +19,10 @@ export default function Mirador(config) {
     </Provider>,
     document.getElementById(config.id),
   );
+  return {
+    actions,
+    store,
+  };
 }
 
 module.exports = Mirador;
