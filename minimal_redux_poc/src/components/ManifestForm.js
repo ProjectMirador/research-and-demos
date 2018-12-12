@@ -29,7 +29,7 @@ class ManifestForm extends Component {
    */
   formSubmit(event) {
     event.preventDefault();
-    this.props.fetchManifest(this.state.formValue);
+    this.props.fetchManifest(this.state.formValue, this.props.manifestRequestVersion);
     this.props.setLastRequested(this.state.formValue);
   }
 
@@ -68,6 +68,7 @@ class ManifestForm extends Component {
 ManifestForm.propTypes = {
   fetchManifest: PropTypes.func.isRequired,
   setLastRequested: PropTypes.func.isRequired,
+  manifestRequestVersion: PropTypes.string.isRequired,
 };
 
 /**
@@ -75,8 +76,10 @@ ManifestForm.propTypes = {
  * @memberof ManifestForm
  * @private
  */
-const mapStateToProps = () => (
-  {}
+const mapStateToProps = ({ config }) => (
+  {
+    manifestRequestVersion: config.manifestRequestVersion,
+  }
 );
 
 /**
@@ -85,8 +88,8 @@ const mapStateToProps = () => (
  * @private
  */
 const mapDispatchToProps = dispatch => ({
-  fetchManifest: manifestUrl => (
-    dispatch(actions.fetchManifest(manifestUrl))
+  fetchManifest: (manifestUrl, manifestRequestVersion) => (
+    dispatch(actions.fetchManifest(manifestUrl, manifestRequestVersion))
   ),
 });
 

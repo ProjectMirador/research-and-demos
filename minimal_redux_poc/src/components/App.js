@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { actions } from '../store';
 import Display from './Display';
 import ManifestForm from './ManifestForm';
 import ManifestListItem from './ManifestListItem';
@@ -97,18 +96,7 @@ const mapStateToProps = state => (
   }
 );
 
-/**
- * mapDispatchToProps - used to hook up connect to action creators
- * @memberof App
- * @private
- */
-const mapDispatchToProps = dispatch => ({
-  fetchManifest: (manifestUrl, manifestRequestVersion) => (
-    dispatch(actions.fetchManifest(manifestUrl, manifestRequestVersion))
-  ),
-});
-
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  null,
 )(App);
