@@ -15,10 +15,10 @@ export class ManifestMetadata extends React.Component {
     return (
       <div>
         <h3>
-          { manifest.manifestation.getLabel().map(label => label.value)[0] }
+          {manifest.manifestation.getLabel().map(label => label.value)[0]}
         </h3>
         <div className={ns('description')}>
-          { manifest.manifestation.getDescription().map(label => label.value) }
+          {manifest.manifestation.getDescription().map(label => label.value)}
         </div>
       </div>
     );

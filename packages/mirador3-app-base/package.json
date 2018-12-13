@@ -1,9 +1,9 @@
 {
   "name": "mirador3-app-base",
   "version": "0.1.0",
-  "private": true,
   "main": "lib/index.js",
   "dependencies": {
+    "deepmerge": "^3.0.0",
     "mirador3-core": "file:../mirador3-core",
     "mirador3-common": "file:../mirador3-common",
     "prop-types": "^15.6.2",
@@ -13,6 +13,7 @@
     "react-redux": "^5.0.7"
   },
   "devDependencies": {
+    "@babel/code-frame": "^7.0.0",
     "@babel/core": "7.1.0",
     "@svgr/webpack": "2.4.1",
     "babel-core": "7.0.0-bridge.0",
@@ -72,7 +73,7 @@
     "workbox-webpack-plugin": "3.6.3"
   },
   "scripts": {
-    "dist": "webpack --config ./config/webpack.config.dist.js",
+    "dist": "webpack --config ./config/webpack.config.dist.js --display-error-details",
     "lib": "node scripts/buildLib.js",
     "lint": "node_modules/.bin/eslint ./",
     "start": "node scripts/start.js",
@@ -80,9 +81,6 @@
     "test": "npm run lint && jest -c jest.json",
     "test:watch": "jest -c jest.json --watch",
     "test:coverage": "jest -c jest.json --coverage"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
   },
   "browserslist": [
     ">0.2%",

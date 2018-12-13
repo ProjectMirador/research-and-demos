@@ -30,6 +30,7 @@
     "webpack-hot-middleware": "^2.24.3"
   },
   "devDependencies": {
+    "@babel/code-frame": "^7.0.0",
     "babel-loader": "^8.0.4",
     "@babel/plugin-proposal-class-properties": "^7.2.1",
     "@babel/core": "^7.1.6",

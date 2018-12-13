@@ -2,8 +2,11 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { actions } from 'mirador3-core';
-import { Display, ManifestForm, ManifestListItem, Workspace, ns } from 'mirador3-common';
-import '../styles/index.scss';
+import {
+  Display, ManifestForm, ManifestListItem, Workspace, ns,
+} from 'mirador3-common';
+
+require('../styles/index.scss');
 
 /**
  * This is the top level Mirador component.
@@ -32,13 +35,13 @@ class AppComponent extends React.Component {
   };
 
   /**
-   * computedContent - computes the content to be displayed based on logic
    *
-   * @return {type}  description
-   * @private
+   * @returns {*}
    */
   computedContent() {
-    const manifest = this.props.manifests[this.state.lastRequested];
+    const { manifests } = this.props;
+    const { lastRequested } = this.state;
+    const manifest = manifests[lastRequested];
     if (manifest) {
       if (manifest.isFetching) {
         return '☕';
@@ -46,15 +49,19 @@ class AppComponent extends React.Component {
       if (manifest.error) {
         return manifest.error.message;
       }
-      return JSON.stringify(manifest.json, 0, 2);
+      return JSON.stringify(manifest.json, [], 2);
     }
     return 'Nothing Selected Yet';
   }
 
+  /**
+   *
+   * @returns {*[]}
+   */
   buildManifestList() {
     const { manifests } = this.props;
     return Object.keys(manifests).map(manifest => (
-      <ManifestListItem key={manifest} manifest={manifest}/>));
+      <ManifestListItem key={manifest} manifest={manifest} />));
   }
 
   /**
@@ -62,14 +69,22 @@ class AppComponent extends React.Component {
    * @return {String} - HTML markup for the component
    */
   render() {
+    const { manifests } = this.props;
+    const { lastRequested } = this.state;
+    const manifestList = Object.keys(manifests).map(manifest => (
+      <ManifestListItem
+        key={manifest}
+        manifest={manifest}
+      />
+    ));
     return (
       <div className={ns('app')}>
         <Workspace />
         <div className={ns('control-panel')}>
           <ManifestForm setLastRequested={this.setLastRequested} />
-          <ul>{this.buildManifestList()}</ul>
+          <ul>{manifestList}</ul>
           <Display
-            manifest={this.props.manifests[this.state.lastRequested]}
+            manifest={manifests[lastRequested]}
           />
         </div>
       </div>

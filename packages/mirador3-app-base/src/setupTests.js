@@ -3,7 +3,7 @@ import fetch from 'jest-fetch-mock'; // eslint-disable-line import/no-extraneous
 import Enzyme from 'enzyme'; // eslint-disable-line import/no-extraneous-dependencies
 import Adapter from 'enzyme-adapter-react-16'; // eslint-disable-line import/no-extraneous-dependencies
 
-const jsdom = new JSDOM('<!doctype html><html><body></body></html>');
+const jsdom = new JSDOM('<!doctype html><html><body/></html>');
 const { window } = jsdom;
 
 /**

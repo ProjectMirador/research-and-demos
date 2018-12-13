@@ -14,13 +14,13 @@ module.exports = {
     library: 'Mirador',
     libraryExport: 'default',
   },
-  resolve: { extensions: ['.js'] },
+  resolve: { extensions: ['.js','.jsx'] },
   module: {
     rules: [
       {
         oneOf: [
           {
-            test: /\.js?$/,
+            test: /\.(js|mjs|jsx)$/,
             exclude: /(node_modules)/,
             loader: 'babel-loader',
           },
@@ -34,10 +34,6 @@ module.exports = {
           },
           {
             loader: require.resolve('file-loader'),
-            // Exclude `js` files to keep "css" loader working as it injects
-            // it's runtime that would otherwise be processed through "file" loader.
-            // Also exclude `html` and `json` extensions so they get processed
-            // by webpacks internal loaders.
             exclude: [/\.(js|mjs|jsx|ts|tsx)$/, /\.html$/, /\.json$/],
             options: {
               name: 'static/media/[name].[hash:8].[ext]',

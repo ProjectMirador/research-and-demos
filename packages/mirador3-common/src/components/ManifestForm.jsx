@@ -20,17 +20,6 @@ class ManifestFormComponent extends React.Component {
   }
 
   /**
-   * formSubmit - triggers manifest update and sets lastRequested
-   * @param  {Event} event
-   * @private
-   */
-  formSubmit = (event) => {
-    event.preventDefault();
-    this.props.fetchManifest(this.state.formValue);
-    this.props.setLastRequested(this.state.formValue);
-  }
-
-  /**
    * handleInputChange - sets state based on input change.
    * @param  {Event} event
    * @private
@@ -44,14 +33,28 @@ class ManifestFormComponent extends React.Component {
   }
 
   /**
+   * formSubmit - triggers manifest update and sets lastRequested
+   * @param  {Event} event
+   * @private
+   */
+  formSubmit = (event) => {
+    event.preventDefault();
+    const { fetchManifest, setLastRequested } = this.props;
+    const { formValue } = this.state;
+    fetchManifest(formValue);
+    setLastRequested(formValue);
+  }
+
+  /**
    * render
    * @return {String} - HTML markup for the component
    */
   render() {
+    const { formValue } = this.state;
     return (
       <form onSubmit={this.formSubmit}>
         <input
-          value={this.state.formValue}
+          value={formValue}
           id="manifestURL"
           type="text"
           onChange={this.handleInputChange}
