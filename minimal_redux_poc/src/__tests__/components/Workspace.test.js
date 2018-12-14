@@ -1,8 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { actions, store } from '../../../src/store';
-import Workspace from '../../../src/components/Workspace';
-import fixture from '../../fixtures/2.json';
+import { actions, store } from '../../store';
+import Workspace from '../../components/Workspace';
+import fixture from '../fixtures/2.json';
 
 describe('Workspace', () => {
   let wrapper;

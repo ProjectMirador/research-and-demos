@@ -1,8 +1,8 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
-import { actions, store } from '../../../src/store';
-import Window from '../../../src/components/Window';
-import fixture from '../../fixtures/24.json';
+import { actions, store } from '../../store';
+import Window from '../../components/Window';
+import fixture from '../fixtures/24.json';
 
 describe('Window', () => {
   let wrapper;

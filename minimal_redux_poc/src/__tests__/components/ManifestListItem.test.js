@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { store } from '../../../src/store';
-import ManifestListItem from '../../../src/components/ManifestListItem';
+import { store } from '../../store';
+import ManifestListItem from '../../components/ManifestListItem';
 
 describe('ManifestListItem', () => {
   it('renders without an error', () => {
