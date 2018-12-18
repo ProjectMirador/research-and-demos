@@ -58,7 +58,7 @@ module.exports = [
     },
   },
   {
-    entry: './src/index.js',
+    entry: './src/index-dist.js',
     output: {
       path: path.join(__dirname, 'dist'),
       filename: 'mirador.min.js',
