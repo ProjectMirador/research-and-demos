@@ -10,17 +10,30 @@ import './styles/index.scss';
 /**
  * Default Mirador instantiation
  */
-export default function Mirador(config) {
+const Mirador = function(config) {
+  const viewer = {
+    actions,
+    store,
+  };
   const action = actions.setConfig(deepmerge(settings, config));
   store.dispatch(action);
+
+  Object.keys(Mirador.plugins).forEach((plugin)=>{
+    Mirador.plugins[plugin].components.forEach((component)=>{
+      if (component.parent === 'global') component.init(viewer);
+    });
+  });
+
   ReactDOM.render(
     <Provider store={store}>
       <App config={config} />
     </Provider>,
     document.getElementById(config.id),
   );
-  return {
-    actions,
-    store,
-  };
+
+  return viewer;
 }
+
+Mirador.plugins = {};
+
+export default Mirador
