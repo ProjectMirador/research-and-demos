@@ -1,4 +1,7 @@
 dist/
 coverage/
+.idea
+package-lock.json
 videos/
 screenshots/
+
