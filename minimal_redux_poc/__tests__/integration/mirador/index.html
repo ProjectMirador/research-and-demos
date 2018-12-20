@@ -10,10 +10,35 @@
     <div id="mirador"></div>
     <script>document.write("<script type='text/javascript' src='../../../dist/mirador.min.js?v=" + Date.now() + "'><\/script>");</script>
     <script type="text/javascript">
-      var miradorInstance = Mirador({
-        id: 'mirador',
-        plugins: ['HelloWorld']
-      });
+     miradorKeyboardControls = (viewer) => {
+       // document.addEventListener('keypress', (event)=>{
+       //   viewer.store.dispatch(viewer.actions.addWindow({
+       //     manifestId: 'https://iiif.harvardartmuseums.org/manifests/object/299843'
+       //   }));
+       //   // alert(JSON.stringify(viewer.store.getState()));
+       // });
+     };
+
+     miradorKeyboardPlugin = {
+       pluginName: 'miradorKeyboardPlugin',
+       reducers: [],
+       actionCreators: [],
+       actionTypes: [],
+       components: [
+         {
+           name: 'miradorKeyBoardControls',
+           init: miradorKeyboardControls,
+           parent: 'global',
+         }
+       ],
+       utils: {},
+       config: {}
+     };
+    </script>
+    <script type="text/javascript">
+     var miradorInstance = new Mirador.MiradorViewer({
+       id: 'mirador', plugins: ['miradorKeyboardPlugin']
+     });
     </script>
   </body>
 </html>
