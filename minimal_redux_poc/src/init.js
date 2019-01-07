@@ -19,11 +19,11 @@ export default function (config) {
   store.dispatch(action);
 
   ReactDOM.render(
-      <Provider store={store}>
+    <Provider store={store}>
       <App config={config} />
-      </Provider>,
+    </Provider>,
     document.getElementById(config.id),
   );
 
   return viewer;
-};
+}
