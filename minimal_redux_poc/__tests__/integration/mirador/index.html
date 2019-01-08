@@ -13,14 +13,6 @@
      var miradorInstance = Mirador.viewer({
        id: 'mirador'
      });
-
-     document.addEventListener('keypress', (event)=>{
-       console.log(event);
-       if (event.code === 'KeyS') {
-         console.log(miradorInstance.store.getState());
-         alert(JSON.stringify(miradorInstance.store.getState()));
-       }
-     });
     </script>
   </body>
 </html>
