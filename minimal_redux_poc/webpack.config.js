@@ -53,7 +53,6 @@ module.exports = [
     },
     module: {
       rules: [
-        eslintLoaderConfig,
         babelLoaderConfig,
       ],
     },
@@ -70,7 +69,6 @@ module.exports = [
     resolve: { extensions: ['.js'] },
     module: {
       rules: [
-        eslintLoaderConfig,
         babelLoaderConfig,
         {
           test: /\.scss$/,

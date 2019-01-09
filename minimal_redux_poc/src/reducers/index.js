@@ -5,15 +5,17 @@ import manifestsReducer from './manifests';
 import configReducer from './config';
 
 /**
- * Action Creators for Mirador
- * @namespace RootReducer
+ * Function to create root reducer
+ * from plugin reducers.
+ * @namespace CreateRootReducer
  */
 
-const rootReducer = combineReducers({
-  workspace: workspaceReducer,
-  windows: windowsReducer,
-  manifests: manifestsReducer,
-  config: configReducer,
-});
-
-export default rootReducer;
+export default function createRootReducer(pluginReducers) {
+  return combineReducers({
+    workspace: workspaceReducer,
+    windows: windowsReducer,
+    manifests: manifestsReducer,
+    config: configReducer,
+    ...pluginReducers,
+  });
+}

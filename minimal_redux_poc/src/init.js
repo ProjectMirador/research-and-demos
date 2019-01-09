@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import deepmerge from 'deepmerge';
 import App from './components/App';
-import { actions, store } from './store';
+import { configureStore } from './store';
 import settings from './config/settings';
 import './styles/index.scss';
 
@@ -12,9 +12,10 @@ import './styles/index.scss';
  */
 export default function (config) {
   const viewer = {
-    actions,
-    store,
+    actions: actions,
+    store: configureStore(),
   };
+
   const action = actions.setConfig(deepmerge(settings, config));
   store.dispatch(action);
 
