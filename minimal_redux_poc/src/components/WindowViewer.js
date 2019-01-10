@@ -1,13 +1,14 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import OpenSeaDragon from 'openseadragon';
-import fetch from 'node-fetch';
+import { connect } from 'react-redux';
+import { actions } from '../store';
 import miradorWithPlugins from '../lib/miradorWithPlugins';
-import ns from '../config/css-ns';
+import OpenSeadragonViewer from './OpenSeadragonViewer';
+import ViewerNavigation from './ViewerNavigation';
 
 /**
  * Represents a WindowViewer in the mirador workspace. Responsible for mounting
- * and rendering OSD.
+ * OSD and Navigation
  */
 class WindowViewer extends Component {
   /**
@@ -16,47 +17,61 @@ class WindowViewer extends Component {
   constructor(props) {
     super(props);
 
-    this.ref = React.createRef();
-    this.viewer = null;
+    const { manifest } = this.props;
+    this.canvases = manifest.manifestation.getSequences()[0].getCanvases();
   }
 
   /**
-   * React lifecycle event
+   * componentDidMount - React lifecycle method
+   * Request the initial canvas on mount
    */
   componentDidMount() {
-    const { manifest } = this.props;
-    if (!this.ref.current) {
-      return false;
-    }
-    this.viewer = OpenSeaDragon({
-      id: this.ref.current.id,
-      showNavigationControl: false,
-    });
-    const that = this;
-    fetch(`${manifest.manifestation.getSequences()[0].getCanvases()[0].getImages()[0].getResource().getServices()[0].id}/info.json`)
-      .then(response => response.json())
-      .then((json) => {
-        that.viewer.addTiledImage({
-          tileSource: json,
-          success: (event) => {
-            const tiledImage = event.item;
+    const { fetchInfoResponse } = this.props;
+    fetchInfoResponse(this.imageInformationUri());
+  }
 
-            /**
-             * A callback for the tile after its drawn
-             * @param  {[type]} e event object
-             */
-            const tileDrawnHandler = (e) => {
-              if (e.tiledImage === tiledImage) {
-                that.viewer.removeHandler('tile-drawn', tileDrawnHandler);
-                that.ref.current.style.display = 'block';
-              }
-            };
-            that.viewer.addHandler('tile-drawn', tileDrawnHandler);
-          },
-        });
-      })
-      .catch(error => console.log(error));
-    return false;
+  /**
+   * componentDidUpdate - React lifecycle method
+   * Request a new canvas if it is needed
+   */
+  componentDidUpdate(prevProps) {
+    const { window, fetchInfoResponse } = this.props;
+    if (prevProps.window.canvasIndex !== window.canvasIndex && !this.infoResponseIsInStore()) {
+      fetchInfoResponse(this.imageInformationUri());
+    }
+  }
+
+  /**
+   * infoResponseIsInStore - checks whether or not an info response is already
+   * in the store. No need to request it again.
+   * @return [Boolean]
+   */
+  infoResponseIsInStore() {
+    const { infoResponses } = this.props;
+    const currentInfoResponse = infoResponses[this.imageInformationUri()];
+    return (currentInfoResponse !== undefined
+      && currentInfoResponse.isFetching === false
+      && currentInfoResponse.json !== undefined);
+  }
+
+  /**
+   * Constructs an image information URI to request from a canvas
+   */
+  imageInformationUri() {
+    const { window } = this.props;
+    return `${this.canvases[window.canvasIndex].getImages()[0].getResource().getServices()[0].id}/info.json`;
+  }
+
+  /**
+   * Return an image information response from the store for the correct image
+   */
+  tileInfoFetchedFromStore() {
+    const { infoResponses } = this.props;
+    return [infoResponses[this.imageInformationUri()]]
+      .filter(infoResponse => (infoResponse !== undefined
+        && infoResponse.isFetching === false
+        && infoResponse.error === undefined))
+      .map(infoResponse => infoResponse.json);
   }
 
   /**
@@ -65,19 +80,42 @@ class WindowViewer extends Component {
   render() {
     const { window } = this.props;
     return (
-      <div
-        className={ns('osd-container')}
-        style={{ display: 'none' }}
-        id={`${window.id}-osd`}
-        ref={this.ref}
-      />
+      <Fragment>
+        <OpenSeadragonViewer
+          tileSources={this.tileInfoFetchedFromStore()}
+          window={window}
+        />
+        <ViewerNavigation window={window} canvases={this.canvases} />
+      </Fragment>
     );
   }
 }
 
+/**
+ * mapStateToProps - to hook up connect
+ * @memberof WindowViewer
+ * @private
+ */
+const mapStateToProps = state => (
+  {
+    infoResponses: state.infoResponses,
+  }
+);
+
+/**
+ * mapDispatchToProps - used to hook up connect to action creators
+ * @memberof WindowViewer
+ * @private
+ */
+const mapDispatchToProps = dispatch => ({
+  fetchInfoResponse: infoId => dispatch(actions.fetchInfoResponse(infoId)),
+});
+
 WindowViewer.propTypes = {
+  infoResponses: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  fetchInfoResponse: PropTypes.func.isRequired,
   manifest: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   window: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
-export default miradorWithPlugins(WindowViewer);
+export default connect(mapStateToProps, mapDispatchToProps)(miradorWithPlugins(WindowViewer));
